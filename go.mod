@@ -5,6 +5,7 @@ go 1.23.7
 require (
 	github.com/ethereum/go-ethereum v1.15.6
 	github.com/google/uuid v1.3.0
+	github.com/joho/godotenv v1.5.1
 	github.com/stretchr/testify v1.10.0
 )
 
