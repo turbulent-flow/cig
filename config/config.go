@@ -34,7 +34,7 @@ var (
 	DefaultEthConfig *EthConfig = &EthConfig{}
 )
 
-func init() {
+func BeforeAction() {
 	// 初始化默认配置
 	DefaultConfig.Init()
 
@@ -55,7 +55,7 @@ func (ec *EthConfig) initEth(cf *Config) {
 	// 用私钥创建交易签名
 	privateKey, err := crypto.HexToECDSA(cf.PrivateKey)
 	if err != nil {
-		log.Fatalf("The private key is invalid")
+		log.Fatalf("The private key is invalid: %v", err)
 	}
 
 	walletAddress := common.HexToAddress(cf.WalletAddress)
