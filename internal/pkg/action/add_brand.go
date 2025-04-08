@@ -11,7 +11,16 @@ import (
 	"github.com/ethereum/go-ethereum/common"
 )
 
-func AddBrand(brand *core.Brand) {
+type ActionError struct {
+	Message string
+}
+
+func (e *ActionError) Error() string {
+	return e.Message
+}
+
+func AddBrand(brand *core.Brand) (status int, err error) {
+	config.BeforeAction()
 	cf := config.DefaultConfig
 	ec := config.DefaultEthConfig
 	defer ec.Client.Close()
@@ -34,7 +43,11 @@ func AddBrand(brand *core.Brand) {
 
 	tx, err := instance.AddBrand(ec.Atuh, encoded)
 	if err != nil {
-		log.Fatalf("Failed to add a brand: %v", err)
+		err = &ActionError{
+			Message: err.Error(),
+		}
+
+		return 0, err
 	}
 
 	receipt, err := bind.WaitMined(context.Background(), ec.Client, tx)
@@ -42,9 +55,7 @@ func AddBrand(brand *core.Brand) {
 		log.Fatalf("Failed to execute the transaction: %v", err)
 	}
 
-	if receipt.Status == 1 {
-		log.Print("The transaction is executed successfully!")
-	} else {
-		log.Print("Failed to execute the transaction!")
-	}
+	status = int(receipt.Status)
+
+	return status, nil
 }
