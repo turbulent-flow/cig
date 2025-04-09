@@ -3,7 +3,6 @@ package core
 import (
 	"cig/internal/pkg/contract"
 	"cig/pkg/helper"
-	"math/big"
 	"time"
 
 	"github.com/ethereum/go-ethereum/accounts/abi"
@@ -19,7 +18,7 @@ type Brand struct {
 
 func (brand *Brand) Init() *Brand {
 	brand.Id = uuid.New()
-	brand.CreatedAt = time.Now()
+	brand.CreatedAt = time.Now().Truncate(time.Second)
 
 	return brand
 }
@@ -59,7 +58,7 @@ func (brand *Brand) PackArguments(reflectionType *abi.Type) ([]byte, error) {
 		Id:          helper.UuidToBytes32(brand.Id),
 		Name:        brand.Name,
 		Description: brand.Description,
-		CreatedAt:   big.NewInt(brand.CreatedAt.Unix()),
+		CreatedAt:   helper.TimeToBigInt(brand.CreatedAt),
 	}
 
 	// 再进行打包，构成合约可以接受的格式，在合约中使用 abi 解码后，
