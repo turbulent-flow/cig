@@ -20,7 +20,6 @@ type Config struct {
 	PrivateKey       string
 	WalletAddress    string
 	GasLimit         int
-	ContractAddress  string
 }
 
 // 与以太坊操作相关的配置
@@ -95,7 +94,6 @@ func (cf *Config) Init() {
 	cf.EthereumEndpoint = os.Getenv("ETHEREUM_ENDPOINT")
 	cf.PrivateKey = os.Getenv("PRIVATE_KEY")
 	cf.WalletAddress = os.Getenv("WALLET_ADDRESS")
-	cf.ContractAddress = os.Getenv("CONTRACT_ADDRESS")
 
 	gasLimit, err := strconv.Atoi(os.Getenv("GAS_LIMIT"))
 	if err != nil {

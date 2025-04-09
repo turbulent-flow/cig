@@ -10,6 +10,7 @@ import (
 
 // case: it should add a brand.
 func TestAddBrand(t *testing.T) {
+	setUp(t)
 	brand := new(core.Brand).Init()
 	brand.Name = "fake-name"
 
@@ -18,10 +19,10 @@ func TestAddBrand(t *testing.T) {
 }
 
 func TestAddBrandWithInvalidName(t *testing.T) {
+	setUp(t)
 	brand := new(core.Brand).Init()
 	_, err := action.AddBrand(brand)
 
-	if assert.Error(t, err) {
-		assert.Contains(t, err.Error(), "Brand name is invalid")
-	}
+	assert.IsType(t, &action.ActionError{}, err)
+	assert.Contains(t, err.Error(), "Brand name is invalid")
 }

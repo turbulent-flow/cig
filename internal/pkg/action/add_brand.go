@@ -6,6 +6,7 @@ import (
 	"cig/internal/pkg/contract"
 	"context"
 	"log"
+	"os"
 
 	"github.com/ethereum/go-ethereum/accounts/abi/bind"
 	"github.com/ethereum/go-ethereum/common"
@@ -21,11 +22,10 @@ func (e *ActionError) Error() string {
 
 func AddBrand(brand *core.Brand) (status int, err error) {
 	config.BeforeAction()
-	cf := config.DefaultConfig
 	ec := config.DefaultEthConfig
 	defer ec.Client.Close()
 
-	contractAddress := common.HexToAddress(cf.ContractAddress)
+	contractAddress := common.HexToAddress(os.Getenv("CONTRACT_ADDRESS"))
 	instance, err := contract.NewContract(contractAddress, ec.Client)
 	if err != nil {
 		log.Fatalf("Failed to create an instance of the contract: %v", err)
