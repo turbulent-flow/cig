@@ -2,7 +2,6 @@ package contract
 
 import (
 	"cig/pkg/helper"
-	"cig/test/support/config"
 	"testing"
 
 	"github.com/google/uuid"
@@ -11,7 +10,7 @@ import (
 
 // case: It should return an error with empty id.
 func TestGetBrandWithEmptyId(t *testing.T) {
-	ec := config.DefaultEthConfig
+	ec := DefaultEthConfig
 	ec.BeforeTest(t)
 	defer ec.Backend.Close()
 
@@ -24,7 +23,7 @@ func TestGetBrandWithEmptyId(t *testing.T) {
 
 // case: It should return an error with invalid id.
 func TestGetBrandWithInvalidId(t *testing.T) {
-	ec := config.DefaultEthConfig
+	ec := DefaultEthConfig
 	ec.BeforeTest(t)
 	defer ec.Backend.Close()
 

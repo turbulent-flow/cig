@@ -3,7 +3,6 @@ package contract
 import (
 	"cig/internal/core"
 	"cig/pkg/helper"
-	"cig/test/support/config"
 
 	"testing"
 
@@ -12,7 +11,7 @@ import (
 
 // case: It should add a brand.
 func TestAddBrand(t *testing.T) {
-	ec := config.DefaultEthConfig
+	ec := DefaultEthConfig
 	ec.BeforeTest(t)
 	defer ec.Backend.Close() // 测试结束后，清理资源
 
@@ -52,7 +51,7 @@ func TestAddBrand(t *testing.T) {
 
 // case: It should return an error with invalid name.
 func TestAddBrandWithInvalidName(t *testing.T) {
-	ec := config.DefaultEthConfig
+	ec := DefaultEthConfig
 	ec.BeforeTest(t)
 	defer ec.Backend.Close()
 
@@ -68,7 +67,7 @@ func TestAddBrandWithInvalidName(t *testing.T) {
 
 // case: It should return an error with invalid id.
 func TestAddBrandWithInvalidId(t *testing.T) {
-	ec := config.DefaultEthConfig
+	ec := DefaultEthConfig
 	ec.BeforeTest(t)
 	defer ec.Backend.Close()
 

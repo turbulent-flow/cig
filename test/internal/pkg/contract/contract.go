@@ -1,4 +1,4 @@
-package config
+package contract
 
 import (
 	"cig/internal/pkg/contract"
