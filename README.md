@@ -15,7 +15,7 @@ WALLET_ADDRESS=[YOUR_WALLET_ADDRESS]
 GAS_LIMIT=3000000
 CONTRACT_ADDRESS=[YOUR_CONTRACT_ADDRESS]
 ```
-启动 Ganache UI 后，可以找到`ETHEREUM_ENDPOINT`、`PRIVATE_KEY`以及`WALLET_ADDRESS`。`CONTRACT_ADDRESS`可以先不填，因为合约地址是在合约部署后生成的，等到测试具体的行为时，再把部署时得到的合约地址填进环境变量中。
+启动 Ganache GUI 后，可以找到`ETHEREUM_ENDPOINT`、`PRIVATE_KEY`以及`WALLET_ADDRESS`。`CONTRACT_ADDRESS`可以先不填，因为合约地址是在合约部署后生成的，等到测试具体的行为时，再把部署时得到的合约地址填进环境变量中。
 
 ### 3. 编译合约文件
 使用 solc 编译合约文件，得到 abi 和字节码。solc 是 Solidity 的源码编译器。如果没有安装，可以使用`brew`安装（如果使用的是 Mac 开发的话）；安装后，可以运行如下命令：
@@ -34,4 +34,4 @@ abigen --bin=build/contract/CIG.bin --abi=build/contract/CIG.abi --pkg=contract 
 ```shell
 go test -v ./...
 ```
-注意：运行`test/internal/pkg/deploy`，可以得到合约地址，需要把它填进环境变量。
+注意：运行`test/internal/pkg/deploy`后，可以得到合约地址，需要把它填进环境变量。
